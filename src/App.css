@@ -1,38 +1,43 @@
-.App {
-  text-align: center;
+html, body, #root, #App, #Monitor {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+code {
+  font-size: 1em;
+  background-color: rgb(53, 53, 53);
   color: white;
+  border-radius: 5px;
+  padding: 4px 6px;
+  cursor: pointer;
+  margin: 0px 5px;
 }
 
-.App-link {
-  color: #61dafb;
+#App {
+  background: white url('./images/bg2.jpg')  no-repeat center;
+  backdrop-filter: blur(5px);
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#MenuBar {
+  height: 30px;
+  width: 100%;
+  color: white;
+  background-color: rgba(58, 58, 58, 0.849);
+}
+
+#Desktop {
+  height: calc(100% - 30px);
 }
