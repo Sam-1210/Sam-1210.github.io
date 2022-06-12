@@ -1,0 +1,29 @@
+.Menu {
+    font-family: "San Francisco";
+    margin: 25px;
+    width: 60%;
+    border: 2px dashed black;
+    
+}
+
+.Menu h1{
+    font-size: 1.5em;
+    font-weight: 800;
+    margin: 10px;
+}
+
+.MenuContainer {
+    margin: 10px;
+}
+
+.MenuItem {
+    font-size: 1.2em;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px 0px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(13, 101, 128);
+    color: white;
+    width: 150px;
+}

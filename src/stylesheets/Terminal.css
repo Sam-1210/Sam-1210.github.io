@@ -1,3 +1,12 @@
+@font-face {
+  font-family: Menlo;
+  src: url('../fonts/Menlo.ttf')  format('truetype');
+}
+
+.Terminal {
+  font-family: Menlo;
+}
+
 .CommandLine {
   margin: 5px;
 }
@@ -11,8 +20,10 @@
   font-weight: 600;
 }
 
-.CommandLine input[type='text'] {
-  background-color: rgba(255, 255, 255, 0);
+.CommandLine input[type='text'], .CommandLine div  {
+  display: inline-block;
+  font-family: sans-serif;
+  background-color: rgba(0, 0, 0, 0);
   text-decoration: none;
   outline: none;
   border: none;
@@ -20,6 +31,7 @@
   font-weight: 300;
   margin-left: 10px;
   width: 50%;
+  cursor: default;
 }
 
 .CommandLine input:disabled {
@@ -31,60 +43,4 @@
   font-size: 1.0em;
   font-weight: 500;
   padding: 15px 0px;
-}
-
-
-.AboutSatyamContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap-reverse;
-  justify-content: space-between;
-  
-  padding: 2px 10px;
-}
-
-.AboutSatyam{
-  max-width: 500px;
-  box-sizing: border-box;
-  padding: 20px;
-}
-
-.AboutSatyam h1 {
-  font-size: 2em;
-  font-weight: 800;
-  color: #077728;
-}
-
-.AboutSatyam h2 {
-  font-size: 1.5em;
-  font-weight: 700;
-}
-
-.AboutSatyam h3 {
-  font-size: 1.3em;
-  font-weight: 700;
-}
-
-.AboutSatyam h3::before {
-  content: "<";
-  color: red;
-}
-
-.AboutSatyam h3::after {
-  content: "/>";
-  color: red;
-}
-
-.AboutSatyam h4 {
-  padding: 10px 0px;
-  font-size: 1.0em;
-  line-height: 120%;
-  font-weight: 400;
-  text-align: justify;
-}
-
-.SatyamDP img{
-  height: 300px;
-  margin-right: 40px;
-  border-radius: 5px;
 }
