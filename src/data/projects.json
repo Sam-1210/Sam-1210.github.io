@@ -1,0 +1,42 @@
+[
+    {
+        "Name" : "DCS JMI",
+        "Image": "dcsjmi.jpg",
+        "Description": "Official Website of DCS JMI",
+        "LinkLive": "https://www.dcsjamia.in",
+        "LinkSource": "",
+        "Tags": ["ReactJS", "ChartJS", "Framer Motion", "SwiperJS", "CSS3"]
+    },
+    {
+        "Name" : "Not(!) Engine",
+        "Image": "nengine.jpg",
+        "Description": "Not Engine is Early in Development Cross-Platform Graphics Engine, Based on Node Architecture with Support for Native Scripting. Being Modular allows it to be used either as an framework for development or as a Game Engine.",
+        "LinkLive": "https://youtu.be/pl0WnPfHMx0",
+        "LinkSource": "https://github.com/Sam-1210/Not-Engine",
+        "Tags": ["C++", "OpenGL", "ImGUI", "Premake", "GLSL"]
+    },
+    {
+        "Name" : "NicheBy",
+        "Image": "nicheby.jpg",
+        "Description": "Hiring Platform by a Startup NicheBy",
+        "LinkLive": "",
+        "LinkSource": "",
+        "Tags": ["NextJS", "MaterialUI", "ExpressJS", "MongoDB", "CSS3", "Socket.IO"]
+    },
+    {
+        "Name" : "Business Game 2",
+        "Image": "bg2.jpg",
+        "Description": "Android Game with the idea of making monopoly game in 3D, Currently having 10K+ Downloads on Google Play Store.",
+        "LinkLive": "https://play.google.com/store/apps/details?id=org.perspective.business2",
+        "LinkSource": "",
+        "Tags": ["GODOT Engine", "GDScript", "Blender"]
+    },
+    {
+        "Name" : "Online Meetings Classes Links Management System",
+        "Image": "omcms.jpg",
+        "Description": "OMCMS Is A Link Management System on An Abstracted View, But It Is Equipped with Combined Tools Like Staff and Schedule Management System, It Offers A Wide Variety Is Utilities to Enhance Your Online Workflow.",
+        "LinkLive": "https://sam-1210.github.io/OMCMS",
+        "LinkSource": "https://github.com/Sam-1210/OMCMS",
+        "Tags": ["ReactJS", "PHP", "MySQL", "CSS3"]
+    }
+]
