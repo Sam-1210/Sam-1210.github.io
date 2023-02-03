@@ -3,6 +3,7 @@ import MyDP from '../images/profilePhoto.jpg'
 import LinkedinIco from "../images/linkedin.png"
 import GithubIco from "../images/github.png"
 import EmailIco from "../images/email.png"
+import Typewriter from 'typewriter-effect';
 
 export default function AboutMe(props)
 {
@@ -14,10 +15,25 @@ export default function AboutMe(props)
         <div>
             <div className="AboutSatyamContainer">
                 <div className="AboutSatyam">
-                    <h2>Hi,</h2>
-                    <h1>I'm Satyam Mishra</h1>
+                    <h2><Typewriter
+                        onInit={(typewriter) => {
+                            typewriter.typeString('Hi,')
+                                .start();
+                        }}
+                    /></h2>
+                    <h1>
+                        <Typewriter
+                            onInit={(typewriter) => {
+                                typewriter.pauseFor(2000)
+                                    .typeString('I am Satyam Mishra')
+                                    .start()
+                                    .pauseFor(4000)
+                                    .stop();
+                            }}
+                        />
+                    </h1>
                     <h3>Software Developer</h3>
-                    <h4>A Computer Science Student, based in Delhi, India. Exploring the field of Software Development and Looking towards Exploring the Industry.</h4>
+                    <h4 className="type" >A Computer Science Student, based in Delhi, India. Exploring the field of Software Development and Looking towards Exploring the Industry.</h4>
                     <div className="ContactLinksContainer">
                         <a className="ContactsLink" href="https://www.linkedin.com/in/satyammishra1210/" target="_blank" rel="noreferrer">
                             <img src={LinkedinIco} alt="Linkedin"/>

@@ -1,0 +1,46 @@
+.TitleBar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+
+.TitleBarLeft {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    vertical-align: middle;
+}
+
+.TitleBar img {
+    height: 20px;
+    width: auto;
+    margin-left: 10px;
+    vertical-align: middle;
+    margin: 0px 15px;
+}
+
+.SearchContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+    border-radius: 5px;
+    background-color: #d1d1d1;
+    padding: 5px 10px;
+    font-size: 18px;
+    width: 30%;
+}
+
+
+.Browser {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}

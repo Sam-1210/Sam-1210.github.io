@@ -17,8 +17,8 @@ function App() {
         <div id="MenuBar">File About</div>
         <motion.div id="Desktop" ref={constraintsRef}>
           <DesktopContext.Provider value={constraintsRef}>
-            <Terminal></Terminal>
             
+            <Browser></Browser>
           </DesktopContext.Provider>
         </motion.div>
       </div>

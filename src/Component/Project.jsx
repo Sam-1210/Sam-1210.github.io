@@ -1,5 +1,7 @@
 import "../stylesheets/Project.css"
 import dynamicImport from "../tools/dynamicImport";
+import ProjectSourceIco from "../images/source.png"
+import ProjectDemoIco from "../images/live.png"
 import ProjectData from "../data/projects.json"
 
 export default function Projects(props) {
@@ -25,22 +27,28 @@ export default function Projects(props) {
 
     let ProjectThumbs = dynamicImport(require.context("../data/project_thumbs/", false, /\.(png|jpe?g|svg)$/))
 
-    let ProjectElements = ProjectData.map((element, index)=>{
+    let ProjectElements = ProjectData.map((element, index) => {
         return (
             <div key={element.Name} className="ProjectContainer">
                 <div className="ProjectDetails">
-                    <div className="ProjectHeading">{element.Name}</div>
-                    <h3>{element.Description}</h3>
+                    <div className="ProjectHeading ProjectName">{element.Name}</div>
+                    <div className="ProjectDescription">{element.Description}</div>
                     {
-                        element.LinkLive ? <a href={element.LinkLive}>View Live</a> : null
+                        element.LinkLive ? <div className="ProjectLinkContainer">
+                            <img className="ProjectLinkIcon" src={ProjectDemoIco} alt="View Project" />
+                            <a className="ProjectLink" href={element.LinkLive}>{"//"}View Live Project/Demo</a>
+                        </div> : null
                     }
                     {
-                        element.LinkSource ? <a href={element.LinkSource}>Browse Code</a> : null
+                        element.LinkSource ? <div className="ProjectLinkContainer">
+                            <img className="ProjectLinkIcon" src={ProjectSourceIco} alt="View Project" />
+                            <a className="ProjectLink" href={element.LinkSource}>{"//"}Browse Source Code</a>
+                        </div> : null
                     }
-                    <div className="ProjectHeading">Tags</div>
+                    <div className="ProjectHeading Tags">Tags</div>
                     <div className="TechStackList">
                         {
-                            element.Tags.map(tag=><div key={tag} className="TechStackItem">{tag}</div>)
+                            element.Tags.map(tag => <div key={tag} className="TechStackItem">{"{"}{tag}{"}"}</div>)
                         }
                     </div>
                 </div>

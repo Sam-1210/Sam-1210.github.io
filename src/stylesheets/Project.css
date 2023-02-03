@@ -1,6 +1,7 @@
 .ProjectList {
     font-family:"consolas";
     width: calc(100% - 20px);
+    text-transform: capitalize;
 }
 
 .ProjectList h1{
@@ -12,13 +13,13 @@
 }
 
 .ProjectList h1::before {
-    content: "<";
-    color: blue;
+    content: "!--";
+    color: rgb(230, 23, 23);
 }
 
 .ProjectList h1::after {
-    content: "/>";
-    color: blue;
+    content: "--!";
+    color: rgb(230, 23, 23);
 }
 
 .ProjectContainer {
@@ -32,9 +33,7 @@
     outline: 1px dashed black;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    
-    color: rgb(0, 0, 0);
-    
+    color: rgb(0, 0, 0);  
 }
 
 .ProjectDetails {
@@ -48,25 +47,72 @@
     margin: 20px 0px;
 }
 
-.ProjectDetails h3 {
+.ProjectName::before {
+    content: "# ";
+    color: rgb(24, 82, 170);
+}
+
+
+.ProjectDescription {
     font-size: 1.2em;
     font-weight: 300;
     margin: 20px 0px;
+    border: 1.1em solid transparent;
+    border-image: url("../images/comment_border_map.png") 90 round;
+}
+
+.ProjectLinkContainer {
+    padding: 5px 10px;
+    background-color: green;
+    width: max-content;
+    border-radius: 10px;
+    margin: 20px 0px;
+}
+
+.ProjectLinkIcon {
+    height: 30px;
+    vertical-align: middle;
+}
+
+.ProjectLink {
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 400px;
+    color: white;
+    margin-left: 10px;
+}
+
+.Tags::before {
+    content: "%";
+    color: blue;
+}
+
+.Tags::after {
+    content: "%";
+    color: blue;
 }
 
 .TechStackList {
-    max-width: 50%;
+    margin-left: 30px;
 }
 
 .TechStackItem {
     display: inline-block;
     margin: 5px 20px 5px 0px;
-    background-color: rgb(48, 71, 206);
-    color: rgb(255, 255, 255);
-    padding: 10px 15px;
-    font-size: 1.2em;
+    font-size: 1.1em;
+    font-weight: 800;
     max-width: max-content;
-    border-radius: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.TechStackItem::before{
+    content: "{";
+    color: maroon;
+}
+
+.TechStackItem::after {
+    content: "}";
+    color: maroon;
 }
 
 .ProjectImage {
@@ -76,4 +122,5 @@
 .ProjectImage img{
     max-width: 500px;
     border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(80, 80, 80, 0.541);
 }
