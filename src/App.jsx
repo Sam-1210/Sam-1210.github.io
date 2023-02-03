@@ -1,8 +1,12 @@
-import { useRef } from "react";
+import { useRef, createContext } from "react";
 import { motion } from "framer-motion";
-import Window from "./Component/Window";
 import Terminal from "./Component/Terminal";
+import Browser from "./Component/Browser";
 import './App.css';
+
+// design right click menu too
+
+export const DesktopContext = createContext();
 
 function App() {
   const constraintsRef = useRef(null);
@@ -12,9 +16,10 @@ function App() {
       <div id="Monitor">
         <div id="MenuBar">File About</div>
         <motion.div id="Desktop" ref={constraintsRef}>
-          <Window title={'Satyam Mishra | Portfolio'} dragComp={constraintsRef}>
+          <DesktopContext.Provider value={constraintsRef}>
             <Terminal></Terminal>
-          </Window>
+            
+          </DesktopContext.Provider>
         </motion.div>
       </div>
     </div>

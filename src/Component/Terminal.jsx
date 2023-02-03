@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Window from "./Window";
 import Navigate from "./Navigate";
 import AboutMe from "./AboutMe";
 import Help from "./Help";
@@ -45,7 +46,7 @@ export default function Terminal(props) {
     const getCommand = e => {
         if (e.type === 'click' || e.key === 'Enter') {
             let command = e.target.value;
-            
+
             if (e.type === 'click') {
                 let tokens = command.split(' ');
                 let firstToken = tokens.shift();
@@ -54,7 +55,7 @@ export default function Terminal(props) {
                 else
                     return;
             }
-            
+
             e.target.value = '';
 
             HistoryIterator.next();
@@ -81,17 +82,19 @@ export default function Terminal(props) {
     }, [terminalHistory]);
 
     return (
-        <div className='Terminal'
-            onClickCapture={e => { CommandReader.current.focus() }}
-        >
-            {HistoryElements}
-            <div className="CommandLine">
-                <label>anonymous@satyam-portfolio ~ $</label>
-                <input type="text"
-                    onKeyUp={getCommand}
-                    autoFocus={true} ref={CommandReader}
-                    onClick={getCommand} />
+        <Window title={'Satyam Mishra | Portfolio'}>
+            <div className='Terminal'
+                onClickCapture={e => { CommandReader.current.focus() }}
+            >
+                {HistoryElements}
+                <div className="CommandLine">
+                    <label>anonymous@satyam-portfolio ~ $</label>
+                    <input type="text"
+                        onKeyUp={getCommand}
+                        autoFocus={true} ref={CommandReader}
+                        onClick={getCommand} />
+                </div>
             </div>
-        </div>
+        </Window>
     );
 }
