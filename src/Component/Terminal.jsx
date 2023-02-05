@@ -15,7 +15,7 @@ function counter(initial = 0, prefix = '') {
     };
 }
 
-export default function Terminal(props) {
+export default function Terminal({idx}) {
     const CommandReader = useRef(null);
     const [terminalHistory, setTerminalHistory] = useState([]);
     const [HistoryElements, setHistoryElements] = useState([]);
@@ -82,7 +82,7 @@ export default function Terminal(props) {
     }, [terminalHistory]);
 
     return (
-        <Window title={'Satyam Mishra | Portfolio'}>
+        <Window idx={idx} title={'Satyam Mishra | Portfolio'}>
             <div className='Terminal'
                 onClickCapture={e => { CommandReader.current.focus() }}
             >

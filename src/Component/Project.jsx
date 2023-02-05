@@ -1,10 +1,14 @@
 import "../stylesheets/Project.css"
+import { useContext } from "react";
+import { DesktopContext } from "../App";
+import Browser from "./Browser";
 import dynamicImport from "../tools/dynamicImport";
 import ProjectSourceIco from "../images/source.png"
 import ProjectDemoIco from "../images/live.png"
 import ProjectData from "../data/projects.json"
 
 export default function Projects(props) {
+    const {DispatchWindowAction} = useContext(DesktopContext);
     const args = [...props.args];
     const token = args.length ? args.shift() : '';
 
@@ -18,7 +22,7 @@ export default function Projects(props) {
             filter = "Display None";
             break;
         case "-f":
-            filter = "Fuck! !";
+            filter = "Force! !";
             break;
         default:
             filter = "Ahhhh another issue!!";
@@ -34,15 +38,19 @@ export default function Projects(props) {
                     <div className="ProjectHeading ProjectName">{element.Name}</div>
                     <div className="ProjectDescription">{element.Description}</div>
                     {
-                        element.LinkLive ? <div className="ProjectLinkContainer">
+                        element.LinkLive ? <div className="ProjectLinkContainer"
+                            onClick={e=>DispatchWindowAction(-1, 'create', {name: "Browser", component: <Browser metadata={{siteURL:element.LinkLive}}/>})}
+                            >
                             <img className="ProjectLinkIcon" src={ProjectDemoIco} alt="View Project" />
-                            <a className="ProjectLink" href={element.LinkLive}>{"//"}View Live Project/Demo</a>
+                            <div className="ProjectLink">{"//"}View Live Project/Demo</div>
                         </div> : null
                     }
                     {
-                        element.LinkSource ? <div className="ProjectLinkContainer">
+                        element.LinkSource ? <div className="ProjectLinkContainer"
+                            onClick={e=>DispatchWindowAction(-1, 'create', {name: "Browser", component: <Browser metadata={{siteURL:element.LinkSource}}/>})}
+                            >
                             <img className="ProjectLinkIcon" src={ProjectSourceIco} alt="View Project" />
-                            <a className="ProjectLink" href={element.LinkSource}>{"//"}Browse Source Code</a>
+                            <div className="ProjectLink">{"//"}Browse Source Code</div>
                         </div> : null
                     }
                     <div className="ProjectHeading Tags">Tags</div>

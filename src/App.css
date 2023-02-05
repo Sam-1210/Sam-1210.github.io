@@ -56,10 +56,125 @@ code {
 #MenuBar {
   height: 30px;
   width: 100%;
-  color: white;
-  background-color: rgba(58, 58, 58, 0.849);
+  color: rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+#MenuBar img {
+  height: 15px;
+  margin: 0px 10px 0px 20px;
+  cursor: pointer;
+}
+
+.MenuBarLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.RunningTask {
+  margin: 0px 15px;
+  font-weight: 600;
+}
+
+.MenuBarLeftItem {
+  margin: 0px 8px;
+  cursor: pointer;
+}
+
+.MenuBarRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.MenuBarRight svg {
+  height: 15px;
+  cursor: pointer;
+  fill:rgba(0, 0, 0, 1)
+}
+
+.MenuBarRightItem {
+  margin: 0px 8px;
+  cursor: pointer;
 }
 
 #Desktop {
+  position: relative;
   height: calc(100% - 30px);
+}
+
+.Dock {
+  height: 70px;
+  min-width: 200px;
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  border-radius: 1.2rem;
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999999;
+}
+
+.DockItem {
+  height: 100%;
+  width: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.DockItem img {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.TaskDot {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.RunningTaskDot {
+  background-color: black;
+}
+
+.StandbyTaskDot {
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 1px solid rgba(0, 0, 0);
+}
+
+.DockSeparator {
+  height: 80%;
+  width: 1px;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 0px 4px;
 }

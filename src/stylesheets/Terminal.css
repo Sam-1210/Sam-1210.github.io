@@ -5,13 +5,12 @@
 
 .Terminal {
   font-family: Menlo;
+  background-color: rgba(255, 255, 255, 0.7);
+  min-height: 100%;
+  padding: 10px;
 }
 
 .CommandLine {
-  margin: 5px;
-}
-
-.CommandLine + div{
   margin: 5px;
 }
 
@@ -42,5 +41,5 @@
   color: rgb(247, 53, 53);
   font-size: 1.0em;
   font-weight: 500;
-  padding: 15px 0px;
+  padding: 15px 5px;
 }

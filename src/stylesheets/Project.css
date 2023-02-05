@@ -67,6 +67,11 @@
     width: max-content;
     border-radius: 10px;
     margin: 20px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
 }
 
 .ProjectLinkIcon {

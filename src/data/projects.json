@@ -3,7 +3,7 @@
         "Name" : "DCS JMI",
         "Image": "dcsjmi.jpg",
         "Description": "Official Website of DCS JMI",
-        "LinkLive": "https://www.dcsjamia.in",
+        "LinkLive": "https://dcsjamia.in",
         "LinkSource": "",
         "Tags": ["ReactJS", "ChartJS", "Framer Motion", "SwiperJS", "CSS3"]
     },

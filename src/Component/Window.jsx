@@ -1,23 +1,60 @@
-import { useRef, useContext, useEffect } from "react";
+import { useRef, useContext, useEffect, useState } from "react";
 import { DesktopContext } from "../App";
 import "../stylesheets/Window.css"
 
-export default function Window({ title = 'Window', children, draggable = true, ShowWindowControls = true, CustomTitleBar = null }) {
+
+export default function Window({idx, title = 'Window', children, draggable = true, 
+        ShowWindowControls = true, CustomTitleBar = null, 
+        DisableClose=(idx===0), DisableMinimise=false, DisableReisze=false,
+        startInFullScreen=false    
+    },) {
     const bodyRef = useRef(null);
     const dragHandle = useRef(null);
     const WindowRef = useRef(null);
-    const desktopRef = useContext(DesktopContext);
+    const [WindowDimensions, setWindowDimensions] = useState(null);
+    const [Mode, setMode] = useState(startInFullScreen ? 'full' : 'normal');
+    const {constraintsRef:desktopRef, maxZIndex, setMaxZIndex, DispatchWindowAction} = useContext(DesktopContext);
+
+    useEffect(() => {
+        if(WindowRef !== null)
+        {
+            WindowRef.current.style.zIndex = maxZIndex;
+            setMaxZIndex(maxZIndex + 1);
+        }
+    }, []);
+
+    useEffect(() => {
+        if(WindowRef !== null)
+        {
+            WindowRef.current.style.zIndex = maxZIndex;
+            setMaxZIndex(maxZIndex + 1);
+            if(startInFullScreen === true) {
+                WindowRef.current.style.width = "100%";
+                WindowRef.current.style.height = "calc(100% - 80px)";
+                WindowRef.current.style.top = "0px";
+                WindowRef.current.style.left = "0px";
+            } else {
+                WindowRef.current.style.width = "60%";
+                WindowRef.current.style.height = "70%";
+                const { width: WindowWidth, height: WindowHeight } = WindowRef.current.getBoundingClientRect();
+                let { width: DesktopWidth, height: DesktopHeight } = desktopRef.current.getBoundingClientRect();
+                WindowRef.current.style.top = (DesktopHeight - WindowHeight) / 2 + "px";
+                WindowRef.current.style.left = (DesktopWidth - WindowWidth) / 2 + "px";
+            }
+        }
+    }, [WindowRef, desktopRef, startInFullScreen]);
 
     useEffect(() => {
         if (WindowRef.current !== null) {
             const element = WindowRef.current;
             element.addEventListener('resize', (e) => {
-                const { x: WinX, y: WinY } = WindowRef.current.getBoundingClientRect();
+                const WinX = WindowRef.current.offsetLeft;
+                const WinY = WindowRef.current.offsetTop;
                 const { width, height } = e.detail;
                 let { x: DesktopX, y: DesktopY, width: maxX, height: maxY } = desktopRef.current.getBoundingClientRect();
                 let { height: WinHeadHeight } = dragHandle.current.getBoundingClientRect();
-                maxX -= WinX - DesktopX;
-                maxY -= WinY - DesktopY;
+                maxX -= WinX;
+                maxY -= WinY;
                 WindowRef.current.style.width = Math.max(Math.min(width, maxX), 200) + "px";
                 WindowRef.current.style.height = Math.max(Math.min(height, maxY), WinHeadHeight + 100) + "px";
             });
@@ -44,8 +81,8 @@ export default function Window({ title = 'Window', children, draggable = true, S
         if (WindowRef.current !== null) {
             const { width: WindowWidth, height: WindowHeight } = WindowRef.current.getBoundingClientRect();
             let { x: DesktopX, y: DesktopY, width: maxX, height: maxY } = desktopRef.current.getBoundingClientRect();
-            if (WindowRef.current.offsetLeft < DesktopX) WindowRef.current.style.left = DesktopX + "px";
-            if (WindowRef.current.offsetTop < DesktopY) WindowRef.current.style.top = DesktopY + "px";
+            if (WindowRef.current.offsetLeft < 0) WindowRef.current.style.left = DesktopX + "px";
+            if (WindowRef.current.offsetTop < 0) WindowRef.current.style.top = DesktopY + "px";
             WindowRef.current.style.width = Math.max(Math.min(WindowWidth, maxX),) + "px !important";
             WindowRef.current.style.height = Math.max(Math.min(WindowHeight, maxY),) + "px !important";
         }
@@ -53,6 +90,7 @@ export default function Window({ title = 'Window', children, draggable = true, S
     }, [bodyRef, dragHandle, WindowRef, desktopRef]);
 
     const drag = e => {
+
         if (draggable === true) {
             e.target.ariaSelected = 'true';
 
@@ -60,8 +98,8 @@ export default function Window({ title = 'Window', children, draggable = true, S
             let InitialMouseY = e.clientY;
             const { width: WindowWidth, height: WindowHeight } = WindowRef.current.getBoundingClientRect();
             let { x: DesktopX, y: DesktopY, width: maxX, height: maxY } = desktopRef.current.getBoundingClientRect();
-            maxX -= WindowWidth - DesktopX;
-            maxY -= WindowHeight - DesktopY;
+            maxX -= WindowWidth;
+            maxY -= WindowHeight;
 
 
             const move = e => {
@@ -79,8 +117,8 @@ export default function Window({ title = 'Window', children, draggable = true, S
                     InitialMouseX = e.clientX;
                     InitialMouseY = e.clientY;
                 }
-                WindowRef.current.style.left = Math.min(Math.max(WindowRef.current.offsetLeft - DraggedMouseX, DesktopX), maxX) + "px";
-                WindowRef.current.style.top = Math.min(Math.max(WindowRef.current.offsetTop - DraggedMouseY, DesktopY), maxY) + "px";
+                WindowRef.current.style.left = Math.min(Math.max(WindowRef.current.offsetLeft - DraggedMouseX, 0), maxX) + "px";
+                WindowRef.current.style.top = Math.min(Math.max(WindowRef.current.offsetTop - DraggedMouseY, 0), maxY) + "px";
             }
 
             const up = e => {
@@ -103,8 +141,49 @@ export default function Window({ title = 'Window', children, draggable = true, S
         }
     }
 
+    const ToogleMode = e => {
+        if(WindowRef !== null)
+        {
+            if(Mode === 'normal') {
+                const dimensions = WindowRef.current.getBoundingClientRect();
+                dimensions.x = WindowRef.current.offsetLeft;
+                dimensions.y = WindowRef.current.offsetTop;
+                WindowRef.current.style.width = "100%";
+                WindowRef.current.style.height = "calc(100% - 80px)";
+                WindowRef.current.style.top = "0px";
+                WindowRef.current.style.left = "0px";
+                setWindowDimensions(dimensions);
+                setMode('full');
+            } else {
+                if(WindowDimensions !== null) {
+                    WindowRef.current.style.width = WindowDimensions.width + "px";
+                    WindowRef.current.style.height = WindowDimensions.height + "px";
+                    WindowRef.current.style.top = WindowDimensions.y + "px";
+                    WindowRef.current.style.left = WindowDimensions.x + "px";
+                } else {
+                    WindowRef.current.style.width = "60%";
+                    WindowRef.current.style.height = "70%";
+                    const { width: WindowWidth, height: WindowHeight } = WindowRef.current.getBoundingClientRect();
+                    let { width: DesktopWidth, height: DesktopHeight } = desktopRef.current.getBoundingClientRect();
+                    WindowRef.current.style.top = (DesktopHeight - WindowHeight) / 2 + "px";
+                    WindowRef.current.style.left = (DesktopWidth - WindowWidth) / 2 + "px";
+                }
+                setMode('normal');
+            }
+        }
+    }
+
+    const Focus = e => {
+        if (WindowRef.current !== null) {
+            WindowRef.current.style.zIndex = maxZIndex + 1;
+            setMaxZIndex(maxZIndex + 1);
+        }
+    }
+
     return (
-        <div className="Window" ref={WindowRef}>
+        <div className="Window" ref={WindowRef}
+            onMouseDown={Focus}
+        >
             <div className="WindowlHead"
                 onMouseDown={drag}
                 onTouchStart={drag}
@@ -123,17 +202,25 @@ export default function Window({ title = 'Window', children, draggable = true, S
                 {
                     ShowWindowControls === true ? (
                         <div className="WindowControls">
-                            <button className="WinControlClose">
+                            <button className="WinControlClose" 
+                                disabled={DisableClose} 
+                                onClick={e=>{DispatchWindowAction(idx, 'close')}}>
                                 <svg width="7" height="7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke="#000" strokeWidth="1.2" strokeLinecap="round" d="M1.182 5.99L5.99 1.182m0 4.95L1.182 1.323"></path>
                                 </svg>
                             </button>
-                            <button className="WinControlResize">
+                            <button className="WinControlMinimize" 
+                                disabled={DisableMinimise}
+                                onClick={e=>{DispatchWindowAction(idx, 'minimize')}}
+                                >
                                 <svg width="6" height="1" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke="#000" strokeWidth="2" strokeLinecap="round" d="M.61.703h5.8"></path>
                                 </svg>
                             </button>
-                            <button className="WinControlMinimize">
+                            <button className="WinControlResize" 
+                                disabled={DisableReisze}
+                                onClick={ToogleMode}
+                                >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.88 12.88">
                                     <circle cx="6.44" cy="6.44" r="6.44" fill="none"></circle>
                                     <path d="M4.871 3.553L9.37 8.098V3.553H4.871zm3.134 5.769L3.506 4.777v4.545h4.499z"></path>
@@ -143,7 +230,11 @@ export default function Window({ title = 'Window', children, draggable = true, S
                     ) : null
                 }
             </div>
-            <div className="WindowBody" onClick={e => e.target === bodyRef.current && e.target.firstChild ? e.target.firstChild.click() : null} ref={bodyRef}>
+            <div className="WindowBody" onMouseDown={e => {
+                if (e.target === bodyRef.current)
+                    e.target.firstChild?.click()
+                WindowRef.current.click()
+            }} ref={bodyRef}>
                 {children}
             </div>
         </div>
