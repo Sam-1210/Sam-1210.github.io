@@ -30,7 +30,7 @@ export default function Window({idx, title = 'Window', children, draggable = tru
             setMaxZIndex(maxZIndex + 1);
             if(startInFullScreen === true) {
                 WindowRef.current.style.width = "100%";
-                WindowRef.current.style.height = "calc(100% - 80px)";
+                WindowRef.current.style.height = "100%";
                 WindowRef.current.style.top = "0px";
                 WindowRef.current.style.left = "0px";
             } else {
@@ -149,7 +149,7 @@ export default function Window({idx, title = 'Window', children, draggable = tru
                 dimensions.x = WindowRef.current.offsetLeft;
                 dimensions.y = WindowRef.current.offsetTop;
                 WindowRef.current.style.width = "100%";
-                WindowRef.current.style.height = "calc(100% - 80px)";
+                WindowRef.current.style.height = "100%";
                 WindowRef.current.style.top = "0px";
                 WindowRef.current.style.left = "0px";
                 setWindowDimensions(dimensions);

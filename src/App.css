@@ -53,6 +53,11 @@ code {
   color: black;
 }
 
+#Monitor {
+  display: flex;
+  flex-direction: column;
+}
+
 #MenuBar {
   height: 30px;
   width: 100%;
@@ -113,7 +118,13 @@ code {
 
 #Desktop {
   position: relative;
-  height: calc(100% - 30px);
+  flex-grow: 1;
+}
+
+.DockContainer {
+  position: relative;
+  width: 100%;
+  height: 75px;
 }
 
 .Dock {
@@ -131,7 +142,7 @@ code {
   scrollbar-width: none;
   border-radius: 1.2rem;
   position: absolute;
-  bottom: 6px;
+  top: 0px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 99999999;

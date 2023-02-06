@@ -134,8 +134,9 @@ function App() {
                     <DesktopContext.Provider value={{constraintsRef, maxZIndex, setMaxZIndex, DispatchWindowAction}}>
                         { windows.map((window, index) => {return cloneElement(window.component, {key:index, idx:index});}) }
                     </DesktopContext.Provider>
-                    <Dock />
                 </div>
+                <div className="DockContainer"><Dock /></div>
+                
             </div>
         </div>
     );
